@@ -16,11 +16,8 @@ int main() {
 
 	printf("\nUseful commands: exit, help");
 
-	printf("%f", CIS_data::molar_masses.at("He"));
+	printf("%f", CIS::parse_molar_mass("He"));
 
-	while (true) {
-		printf("")
-	}
 
 
 	return 0;
