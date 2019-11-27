@@ -11,7 +11,7 @@ CIS_2_0: objects/CIS_2_0.o objects/CIS_data.o objects/CIS_parsing.o libcalestr.a
 	g++ -o CIS_2_0 objects/CIS_2_0.o objects/CIS_data.o objects/CIS_parsing.o calestr/libcalestr.a
 
 libcalestr.a: 
-	make calestr/makefile
+	cd calestr && make -f makefile
 
 objects/CIS_2_0.o: sources/CIS_2_0.cpp
 	g++ -o objects/CIS_2_0.o -c sources/CIS_2_0.cpp
