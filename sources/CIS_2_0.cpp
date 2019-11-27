@@ -7,6 +7,7 @@
 
 #include "CIS_data.h"
 #include "CIS_parsing.h"
+#include "../calestr/calestr.h"
 
 
 
@@ -16,9 +17,17 @@ int main() {
 
 	printf("\nUseful commands: exit, help\n");
 
-	printf("%f\n", CIS::parse_molar_mass("He"));
+	std::string entry = "";
+	while (true) {
+		printf("[CIS]$ ");
+		std::getline(std::cin, entry);
 
+		if (calestr::strip(entry) == "") {
+			continue;
+		}
 
+		CIS::parse_user_input(entry);
+	}
 
 	return 0;
 }
