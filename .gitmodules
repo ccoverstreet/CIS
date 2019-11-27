@@ -1,0 +1,3 @@
+[submodule "calestr"]
+	path = calestr
+	url = https://github.com/ccoverstreet/calestr.git
