@@ -14,9 +14,9 @@ int main() {
 	printf("Chemical Information System\n");
 	printf("Cale Overstreet 11/24/2019\n");
 
-	printf("\nUseful commands: exit, help");
+	printf("\nUseful commands: exit, help\n");
 
-	printf("%f", CIS::parse_molar_mass("He"));
+	printf("%f\n", CIS::parse_molar_mass("He"));
 
 
 
