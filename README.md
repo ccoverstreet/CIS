@@ -8,6 +8,7 @@ To install CIS, run the following commands:
 1. `git clone --recursive https://github.com/ccoverstreet/CIS.git`
 2. `cd CIS`
 3. `make`
+4. `./CIS_2_0` or `CIS_2_0.exe`
 
 The above three steps create a single executable file called "CIS_2_0". There is also a "CIS" executable which is the old version of the program. Both builds are stable, but "CIS_2_0" is more stable and "CIS" will be removed in the future with "CIS_2_0" becoming the new "CIS".
 
