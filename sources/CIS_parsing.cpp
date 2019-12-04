@@ -45,6 +45,10 @@ float CIS::parse_molar_mass(std::string formula) {
 
 	std::vector<std::string> components = CIS::split_chem_formula(formula);
 
+	for (int i = 0; i < components.size(); i++) {
+		std::cout << components[i] << std::endl;
+	}
+
 	float molar_mass = 0;
 	int i = 0;
 	while (i < components.size()) { 
@@ -98,11 +102,12 @@ std::vector<std::string> CIS::split_chem_formula(std::string raw_formula) {
 				w++;
 			}
 
+
+			std::cout << w << std::endl;
 			components.push_back(raw_formula.substr(i, w));
 			i += w; // Iterating;
+			continue;
 		}
-
-		i++;
 	}		
 
 	return components;
