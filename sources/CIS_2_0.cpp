@@ -19,14 +19,14 @@ int main() {
 
 	std::string entry = "";
 	while (true) {
-		printf("\n[CIS]$ ");
+		printf("[CIS]$ ");
 		std::getline(std::cin, entry);
 
 		if (calestr::strip(entry) == "") {
 			continue;
 		}
 
-		printf("\n");
+		//printf("\n");
 		CIS::parse_user_input(entry);
 	}
 

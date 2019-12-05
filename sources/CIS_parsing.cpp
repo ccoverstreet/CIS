@@ -30,8 +30,10 @@ void CIS::parse_user_input(std::string user_input) {
 		if (molar_mass_output == -1) {
 			printf("Error in chemical formula\n");
 		} else {
-			printf("Molar mass of %s: %f\n", split_input[1].c_str(), molar_mass_output);
+			printf("\nMolar mass of %s: %f\n\n", split_input[1].c_str(), molar_mass_output);
 		}
+	} else {
+		printf("Command not recognized. Type \"commands\" or \"help\" to see available commands\n");
 	}
 } 
 
@@ -45,8 +47,12 @@ float CIS::parse_molar_mass(std::string formula) {
 
 	std::vector<std::string> components = CIS::split_chem_formula(formula);
 
+
+	printf("\nConstituent masses:\n");
 	for (int i = 0; i < components.size(); i++) {
-		std::cout << components[i] << std::endl;
+		if (isalpha(components[i][0]) && CIS_data::molar_masses.count(components[i])) {
+			printf("\tMolar mass of %s: %f\n", components[i].c_str(), CIS_data::molar_masses.at(components[i]));
+		} 
 	}
 
 	float molar_mass = 0;
@@ -63,7 +69,7 @@ float CIS::parse_molar_mass(std::string formula) {
 					i += 1;
 					continue;
 				}
-			} else{ // Throw error aka -1
+			} else { // Throw error aka -1
 				return -1;
 			}
 		}
@@ -103,7 +109,6 @@ std::vector<std::string> CIS::split_chem_formula(std::string raw_formula) {
 			}
 
 
-			std::cout << w << std::endl;
 			components.push_back(raw_formula.substr(i, w));
 			i += w; // Iterating;
 			continue;
