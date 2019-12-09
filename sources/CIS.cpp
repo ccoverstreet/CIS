@@ -22,6 +22,7 @@ int main() {
 		printf("[CIS]$ ");
 		std::getline(std::cin, entry);
 		if (std::cin.eof() == 1) { // Checks to see if EOF was sent. Kills Program
+			printf("exit\n");
 			return 0;
 		}
 
