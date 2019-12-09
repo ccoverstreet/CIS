@@ -21,6 +21,9 @@ int main() {
 	while (true) {
 		printf("[CIS]$ ");
 		std::getline(std::cin, entry);
+		if (std::cin.eof() == 1) { // Checks to see if EOF was sent. Kills Program
+			return 0;
+		}
 
 		if (calestr::strip(entry) == "") {
 			continue;
