@@ -132,13 +132,8 @@ void CIS::help_printout() {
 
 void CIS::commands_printout() {
 	// Printout function for all program commands
-	printf("\n");
-	
 	printf("help: prints out basic program information\n");
 	printf("commands: prints out all program commands and usage\n");
 	printf("mm: Calculates and prints molar mass of given arguments\n");
-	printf("\tExample - mm CO2");
-
-	printf("\n");
-
+	printf("\tExample - mm CO2\n");
 }
