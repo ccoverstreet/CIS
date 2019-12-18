@@ -1,5 +1,11 @@
+EXTRA_FLAGS = 
+
+ifeq ($(OS), Windows_NT))
+	EXTRA_FLAGS = -static
+endif
+
 CIS: objects/CIS.o objects/CIS_data.o objects/CIS_parsing.o libcalestr.a
-	g++ -o CIS objects/CIS.o objects/CIS_data.o objects/CIS_parsing.o calestr/libcalestr.a
+	g++ $(EXTRA_FLAGS) -o CIS objects/CIS.o objects/CIS_data.o objects/CIS_parsing.o calestr/libcalestr.a
 
 libcalestr.a: 
 	cd calestr && make -f makefile
