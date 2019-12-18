@@ -1,6 +1,6 @@
 EXTRA_FLAGS = 
 
-ifeq ($(OS), Windows_NT))
+ifeq ($(OS), Windows_NT)
 	EXTRA_FLAGS = -static
 endif
 
