@@ -1,4 +1,4 @@
 {
 	"build": "make",
-	"start": "CIS"
+	"start": "./CIS"
 }
