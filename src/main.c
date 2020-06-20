@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "parsing.h"
+
 void help() {
 	printf("Chemical Information System\n");
 	printf("\tmm\tMolar mass eg. \"mm H2O\" gives ~18\n");
@@ -19,17 +21,21 @@ int main() {
 	printf("Version 2.0 - RELEASE DATE\n");
 	printf("Type help for list of commands and usage\n");
 
+	printf("Creating String Array\n");
+	array_string* myarray = array_string_create(2);
+	printf("Pushing to string array\n");
+	array_string_push(myarray, "asd");
+	array_string_push(myarray, "asd1");
+	array_string_push(myarray, "asd2");
+	array_string_print_all(myarray);
+	array_string_destroy(myarray);
+
 	// Primary program loop for retrieving user input and branching based on request
 	while (1) {
 		char input[30];
 		char* input_ptr = input;
 		printf("[CIS]: ");
 		fgets(input, 30, stdin);
-
-		if (test != NULL) {
-			printf("hi");
-			test = 'a';
-		}
 
 		printf("%s\n", input);
 		// Check if EOF was submitted
