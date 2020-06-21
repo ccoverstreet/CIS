@@ -1,17 +1,14 @@
-// parsing.h: CIS string parsing module
+// string_array.c: CIS String Array and Related Functions
 // Cale Overstreet
-// June 20, 2020
-// This module handles string parsing or user input.
+// June 21, 2020
+// Contains the array_string type which is used for holding the split user input by a specific delimiter
 
-#include <string.h>
+#include "string_array.h"
 
-typedef struct {
-	char **strings;
-	unsigned int size;
-	unsigned int used;
-} array_string;
+#include <stdlib.h>
+#include <stdio.h>
 
-array_string *array_string_create(unsigned int size) {
+array_string* array_string_create(unsigned int size) {
 	array_string *new_array_string = malloc(sizeof(array_string));
 	new_array_string->strings = malloc(size * sizeof(char*));
 	new_array_string->size = size;
@@ -20,7 +17,7 @@ array_string *array_string_create(unsigned int size) {
 	return new_array_string;
 }
 
-void array_string_destroy(array_string *arry) {
+void array_string_destroy(array_string  *arry) {
 	for (int i = 0; i < arry->used; i++) {
 		free(arry->strings[i]);
 	}
@@ -29,7 +26,7 @@ void array_string_destroy(array_string *arry) {
 	free(arry);
 }
 
-void array_string_push(array_string *arry, const char* value) {
+void array_string_push(array_string *arry, const char *value) {
 	// Push new string to string array
 	if (arry->used == arry->size) {
 		// Increased allocated size for array of char*
@@ -42,6 +39,17 @@ void array_string_push(array_string *arry, const char* value) {
 	arry->used++; // Increment used size
 }
 
+void array_string_print_content(array_string *arry) {
+	// Used for debugging
+	printf("\nSize: %d char* or %d bytes\n", arry->size, arry->size * sizeof(char*));
+	printf("Used: %d char* or %d bytes\n", arry->used, arry->used * sizeof(char*));
+	for (int i = 0; i < arry->used; i++) {
+		printf("\"%s\"\n", arry->strings[i]);
+	}
+	printf("\n");
+}
+
+// ---------- String Manipulators ----------
 void string_slice(const char *raw_string, char *buffer, int start, int end) {
 	for (int i = start; i <= end; i++) {
 		buffer[i - start] = raw_string[i];
@@ -82,15 +90,3 @@ array_string *string_split(const char *input_str, char delimiter) {
 
 	return new_array;
 }
-
-
-void array_string_print_content(array_string *arry) {
-	// Used for debugging
-	printf("\nSize: %d char* or %d bytes\n", arry->size, arry->size * sizeof(char*));
-	printf("Used: %d char* or %d bytes\n", arry->used, arry->used * sizeof(char*));
-	for (int i = 0; i < arry->used; i++) {
-		printf("\"%s\"\n", arry->strings[i]);
-	}
-	printf("\n");
-}
-

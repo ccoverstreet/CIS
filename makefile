@@ -1,11 +1,17 @@
-CIS: objects objects/main.o
+CIS: objects objects/main.o objects/string_array.o objects/molar_mass.o
 	gcc objects/*.o -o CIS
 
 objects: 
 	mkdir objects
 
-objects/main.o: src/main.c src/parsing.h
+objects/main.o: src/main.c src/string_array.h
 	gcc -c src/main.c -o objects/main.o
+
+objects/string_array.o: src/string_array.c src/string_array.h
+	gcc -c src/string_array.c -o objects/string_array.o
+
+objects/molar_mass.o: src/molar_mass.c
+	gcc -c src/molar_mass.c -o objects/molar_mass.o
 
 run: CIS
 	./CIS

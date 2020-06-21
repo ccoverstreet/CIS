@@ -2,7 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "parsing.h"
+#include "string_array.h"
+#include "molar_mass.h"
 
 void help() {
 	printf("Chemical Information System\n");
@@ -18,8 +19,8 @@ void remove_newline(char *input) {
 int main() {
 	printf("Chemical Information System\n");
 	printf("Cale Overstreet\n");
-	printf("Version 2.0 - RELEASE DATE\n");
-	printf("Type help for list of commands and usage\n");
+	printf("Version 2.0 - RELEASE DATE\n\n");
+	printf("Type help for list of commands and usage\n\n");
 
 	// Primary program loop for retrieving user input and branching based on request
 	while (1) {
@@ -47,7 +48,11 @@ int main() {
 		} else if (!strcmp(split_input->strings[0], "help")){
 			help();
 		} else if (!strcmp(split_input->strings[0], "mm")) {
-			printf("Molar Mass\n");
+			if (split_input->used < 2) {
+				printf("Insufficient arguments for mm (Molar Mass) command\n");
+			} else {
+				printf("Molar mass of %s: %f g/mol\n", split_input->strings[1], molar_mass_calculate(split_input->strings[1]));
+			}
 		}
 
 		array_string_destroy(split_input);
