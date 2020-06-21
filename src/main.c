@@ -7,6 +7,7 @@
 
 void help() {
 	printf("Chemical Information System\n");
+	printf("Commands:\n");
 	printf("\tmm\tMolar mass eg. \"mm H2O\" gives ~18\n");
 }
 
@@ -40,7 +41,6 @@ int main() {
 		remove_newline(input);
 
 		array_string *split_input = string_split(input, ' ');
-		array_string_print_content(split_input);
 
 		// Branch based on input
 		if (!strcmp(split_input->strings[0], "exit")) {
