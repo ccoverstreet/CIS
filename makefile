@@ -1,24 +1,20 @@
-EXTRA_FLAGS = 
+CIS: objects objects/main.o objects/string_array.o objects/molar_mass.o src/elements.h
+	gcc objects/*.o -o CIS
 
-ifeq ($(OS), Windows_NT)
-	EXTRA_FLAGS = -static
-endif
+objects: 
+	mkdir objects
 
-CIS: objects/CIS.o objects/CIS_data.o objects/CIS_parsing.o libcalestr.a
-	g++ $(EXTRA_FLAGS) -o CIS objects/CIS.o objects/CIS_data.o objects/CIS_parsing.o calestr/libcalestr.a
+objects/main.o: src/main.c src/string_array.h
+	gcc -c src/main.c -o objects/main.o
 
-libcalestr.a: 
-	cd calestr && make -f makefile
+objects/string_array.o: src/string_array.c src/string_array.h
+	gcc -c src/string_array.c -o objects/string_array.o
 
-objects/CIS.o: sources/CIS.cpp
-	g++ -o objects/CIS.o -c sources/CIS.cpp
+objects/molar_mass.o: src/molar_mass.c src/elements.h
+	gcc -c src/molar_mass.c -o objects/molar_mass.o
 
-objects/CIS_data.o: sources/CIS_data.cpp
-	g++ -o objects/CIS_data.o -c sources/CIS_data.cpp
+run: CIS
+	./CIS
 
-objects/CIS_parsing.o: sources/CIS_parsing.cpp
-	g++ -o objects/CIS_parsing.o -c sources/CIS_parsing.cpp
-
-
-clean:
-	rm objects/*.o
+memcheck: CIS
+	valgrind --tool=memcheck --leak-check=full -s ./CIS
