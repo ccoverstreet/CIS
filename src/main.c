@@ -25,7 +25,6 @@ int main() {
 	// Primary program loop for retrieving user input and branching based on request
 	while (1) {
 		char input[30];
-		char* input_ptr = input;
 		printf("[CIS]: ");
 
 		char *result = fgets(input, 30, stdin);
@@ -33,6 +32,9 @@ int main() {
 		if (result == NULL) {
 			printf("EOF\nExiting CIS...\n");
 			return 0;
+		} else if(strlen(input) == 1) {
+			// Check if it's only a newline and continue
+			continue;
 		}
 
 		remove_newline(input);
@@ -51,7 +53,12 @@ int main() {
 			if (split_input->used < 2) {
 				printf("Insufficient arguments for mm (Molar Mass) command\n");
 			} else {
-				printf("Molar mass of %s: %f g/mol\n", split_input->strings[1], molar_mass_calculate(split_input->strings[1]));
+				float calculated_mass = molar_mass_calculate(split_input->strings[1]);
+				if (calculated_mass == 0) {
+					printf("ERROR: Unable to calculate molar mass. See above errors\n");
+				} else {
+					printf("Molar mass of %s: %f g/mol\n", split_input->strings[1], calculated_mass);
+				}
 			}
 		}
 

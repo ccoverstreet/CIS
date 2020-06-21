@@ -3,8 +3,8 @@
 // June 21, 2020
 // Implementation of molar mass parsing
 
-
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 
 #include "string_array.h"
@@ -13,31 +13,80 @@
 
 float molar_mass_calculate(const char *formula) {
 	int position = 0;
-	float mass_sum = 0;
+
+	array_string *split_formula = array_string_create(1);
+
+	int segment_start = 0;
+	int numeric_segment = 0;
 	while (formula[position] != '\0') {
-		int chunk_size = 0;
-		if (isupper(formula[position])) {
-			// Check if element chunk starts with uppercase
-			chunk_size++;
-			if (formula[position + 1] != '\0') {
-				if (islower(formula[position + 1])) {
-					chunk_size++;
-					char element_symbol[3] = "";
-					string_slice(formula, element_symbol, position, position + chunk_size - 1);
-					printf("%d\n", molar_mass_element_exists(element_symbol));
-				}
+		if (isupper(formula[position]))	{
+			numeric_segment = 0;
+			if(segment_start == position) {
+				position++;
+				continue;
 			}
-			
-		} else {
-			printf("ERROR: Element symbol must start with capital\n");
+
+			char segment[position - segment_start + 1];
+			memset(segment, 0, position - segment_start + 1);
+			string_slice(formula, segment, segment_start, position - 1);
+
+			array_string_push(split_formula, segment);
+
+			segment_start = position;
+		} else if (isdigit(formula[position]) && numeric_segment == 0) {
+			numeric_segment = 1;
+
+			char segment[position - segment_start + 1];
+			memset(segment, 0, position - segment_start + 1);
+			string_slice(formula, segment, segment_start, position - 1);
+
+			if (segment_start == position) {
+				continue;
+			}
+			array_string_push(split_formula, segment);
+
+			segment_start = position;
+		} else if (isdigit(formula[position]) && numeric_segment == 1) {
+			position++;
+			continue;		
 		}
 
 		position++;
 	}
 
-	printf("%s\n", formula);
+	char segment[position - segment_start + 1];
+	memset(segment, 0, position - segment_start + 1); 
+	string_slice(formula, segment, segment_start, position - 1);
+	array_string_push(split_formula, segment);
 
-	return 3.3;
+	float sum = molar_mass_value_substitution(split_formula);
+
+	array_string_destroy(split_formula);
+
+	return sum;
+}
+
+float molar_mass_value_substitution(array_string *arry) {
+	int i = 0;
+	float mass_sum = 0;
+
+	while (i < arry->used) {
+		if (isalpha(arry->strings[i][0])) {
+			float element_mass = periodic_table_get_mass(arry->strings[i]);
+			if (element_mass == 0) {
+				printf("ERROR: Unable to find Element \"%s\". Aborting calculation.\n", arry->strings[i]);
+				return 0;	
+			} else if (i + 1 < arry->used && isdigit(arry->strings[i + 1][0])) {
+				mass_sum += element_mass * atoi(arry->strings[i + 1]);
+				i++;
+			} else {
+				mass_sum += element_mass;
+			}
+		}
+		i++;
+	}
+
+	return mass_sum;
 }
 
 int molar_mass_element_exists(const char *element) {

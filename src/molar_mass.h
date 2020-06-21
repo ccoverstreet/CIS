@@ -8,3 +8,5 @@
 float molar_mass_calculate(const char *formula);
 
 int molar_mass_element_exists(const char *element);
+
+float molar_mass_value_substitution(array_string *arry);
