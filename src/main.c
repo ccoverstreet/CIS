@@ -21,64 +21,37 @@ int main() {
 	printf("Version 2.0 - RELEASE DATE\n");
 	printf("Type help for list of commands and usage\n");
 
-	/*
-	printf("Creating String Array\n");
-	array_string* myarray = array_string_create(2);
-	printf("Pushing to string array\n");
-	array_string_push(myarray, "asd");
-	array_string_push(myarray, "asd1");
-	array_string_push(myarray, "asd2");
-	printf("Index 2: %s\n", myarray->strings[1]);
-	array_string_print_content(myarray);
-	array_string_destroy(myarray);
-	*/
-
-	/*
-	char new_str[20] = "";
-	const char *mystring = "ABCDEFGHIJ";
-	string_slice(mystring, new_str, 0, 2);
-	printf("%s\n", new_str);
-	*/
-
-
-	array_string* split_string = string_split("ASD   ASD", ' ');
-	array_string_print_content(split_string);
-	array_string_destroy(split_string);
-
 	// Primary program loop for retrieving user input and branching based on request
-	/*
 	while (1) {
 		char input[30];
 		char* input_ptr = input;
 		printf("[CIS]: ");
-		fgets(input, 30, stdin);
 
-		printf("%s\n", input);
-		// Check if EOF was submitted
-		if (feof(stdin)) {
-			printf("\nExiting CIS\n");
+		char *result = fgets(input, 30, stdin);
+		// Check if input is EOF or error and peacefully close program
+		if (result == NULL) {
+			printf("EOF\nExiting CIS...\n");
 			return 0;
 		}
 
-		remove_newline(input_ptr);
-		printf("--%s--\n", input_ptr);
+		remove_newline(input);
 
-		char *token = strtok(input, " ");
-		while (token != NULL) {
-			if (!strcmp(token, "exit")) {
-				printf("Exiting CIS\n");
-			} else if (!strcmp(token, "help")) {
-				help();
-			} else if (!strcmp(token, "mm")) {
-				char *banana = token;
-				token = strtok(NULL, " ");
-				printf("%s-%s\n", banana, token);
-			}
+		array_string *split_input = string_split(input, ' ');
+		array_string_print_content(split_input);
 
-			token = strtok(NULL, " ");
+		// Branch based on input
+		if (!strcmp(split_input->strings[0], "exit")) {
+			printf("Exiting CIS...\n");
+			array_string_destroy(split_input);
+			return 0;
+		} else if (!strcmp(split_input->strings[0], "help")){
+			help();
+		} else if (!strcmp(split_input->strings[0], "mm")) {
+			printf("Molar Mass\n");
 		}
+
+		array_string_destroy(split_input);
 	}
-	*/
 
 	return 0;
 }

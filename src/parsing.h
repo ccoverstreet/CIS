@@ -33,7 +33,6 @@ void array_string_push(array_string *arry, const char* value) {
 	// Push new string to string array
 	if (arry->used == arry->size) {
 		// Increased allocated size for array of char*
-		printf("Need to increase array size\n");
 		arry->strings = realloc(arry->strings, 2 * arry->size * sizeof(char *));
 		arry->size = arry->size * 2; // Currently using doubling behavior
 	}
@@ -63,7 +62,6 @@ array_string *string_split(const char *input_str, char delimiter) {
 				a = i + 1;
 				b = i;
 			} else {
-				printf("%d\n", b - a + 1);
 				char buffer[b - a + 1];	
 				memset(buffer, 0, (b - a + 1) * sizeof(char));
 				string_slice(input_str, buffer, a, b - 1);
@@ -72,7 +70,6 @@ array_string *string_split(const char *input_str, char delimiter) {
 				b = i;
 			}
 		} else if (i == input_str_len - 1) {
-			printf("%d\n", b - a + 2);
 			char buffer[b - a + 2];	
 			memset(buffer, 0, (b - a + 2) * sizeof(char));
 			string_slice(input_str, buffer, a, b);
