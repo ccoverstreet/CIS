@@ -11,4 +11,4 @@ run: CIS
 	./CIS
 
 memcheck: CIS
-	valgrind --tool=memcheck -s ./CIS
+	valgrind --tool=memcheck --leak-check=full -s ./CIS

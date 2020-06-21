@@ -21,16 +21,32 @@ int main() {
 	printf("Version 2.0 - RELEASE DATE\n");
 	printf("Type help for list of commands and usage\n");
 
+	/*
 	printf("Creating String Array\n");
 	array_string* myarray = array_string_create(2);
 	printf("Pushing to string array\n");
 	array_string_push(myarray, "asd");
 	array_string_push(myarray, "asd1");
 	array_string_push(myarray, "asd2");
-	array_string_print_all(myarray);
+	printf("Index 2: %s\n", myarray->strings[1]);
+	array_string_print_content(myarray);
 	array_string_destroy(myarray);
+	*/
+
+	/*
+	char new_str[20] = "";
+	const char *mystring = "ABCDEFGHIJ";
+	string_slice(mystring, new_str, 0, 2);
+	printf("%s\n", new_str);
+	*/
+
+
+	array_string* split_string = string_split("ASD   ASD", ' ');
+	array_string_print_content(split_string);
+	array_string_destroy(split_string);
 
 	// Primary program loop for retrieving user input and branching based on request
+	/*
 	while (1) {
 		char input[30];
 		char* input_ptr = input;
@@ -62,6 +78,7 @@ int main() {
 			token = strtok(NULL, " ");
 		}
 	}
+	*/
 
 	return 0;
 }
