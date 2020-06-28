@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <string.h>
+
 typedef struct {
 	char name[13];
 	char symbol[2];

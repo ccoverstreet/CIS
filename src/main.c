@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "string_array.h"
+#include "JMZ-String/jmz_string.h"
 #include "molar_mass.h"
 
 void help() {
@@ -40,12 +40,12 @@ int main() {
 
 		remove_newline(input);
 
-		array_string *split_input = string_split(input, ' ');
+		jmz_String_Array *split_input = jmz_string_split(input, ' ');
 
 		// Branch based on input
 		if (!strcmp(split_input->strings[0], "exit")) {
 			printf("Exiting CIS...\n");
-			array_string_destroy(split_input);
+			jmz_string_array_destroy(split_input);
 			return 0;
 		} else if (!strcmp(split_input->strings[0], "help")){
 			help();
@@ -62,7 +62,7 @@ int main() {
 			}
 		}
 
-		array_string_destroy(split_input);
+		jmz_string_array_destroy(split_input);
 	}
 
 	return 0;

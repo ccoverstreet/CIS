@@ -7,14 +7,14 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include "string_array.h"
+#include "JMZ-String/jmz_string.h"
 #include "elements.h"
 #include "molar_mass.h"
 
 float molar_mass_calculate(const char *formula) {
 	int position = 0;
 
-	array_string *split_formula = array_string_create(1);
+	jmz_String_Array *split_formula = jmz_string_array_create(1);
 
 	int segment_start = 0;
 	int numeric_segment = 0;
@@ -28,9 +28,9 @@ float molar_mass_calculate(const char *formula) {
 
 			char segment[position - segment_start + 1];
 			memset(segment, 0, position - segment_start + 1);
-			string_slice(formula, segment, segment_start, position - 1);
+			jmz_string_slice(formula, segment, position - segment_start + 1, segment_start, position - 1);
 
-			array_string_push(split_formula, segment);
+			jmz_string_array_push(split_formula, segment);
 
 			segment_start = position;
 		} else if (isdigit(formula[position]) && numeric_segment == 0) {
@@ -38,12 +38,12 @@ float molar_mass_calculate(const char *formula) {
 
 			char segment[position - segment_start + 1];
 			memset(segment, 0, position - segment_start + 1);
-			string_slice(formula, segment, segment_start, position - 1);
+			jmz_string_slice(formula, segment, position - segment_start + 1, segment_start, position - 1);
 
 			if (segment_start == position) {
 				continue;
 			}
-			array_string_push(split_formula, segment);
+			jmz_string_array_push(split_formula, segment);
 
 			segment_start = position;
 		} else if (isdigit(formula[position]) && numeric_segment == 1) {
@@ -56,17 +56,17 @@ float molar_mass_calculate(const char *formula) {
 
 	char segment[position - segment_start + 1];
 	memset(segment, 0, position - segment_start + 1); 
-	string_slice(formula, segment, segment_start, position - 1);
-	array_string_push(split_formula, segment);
+	jmz_string_slice(formula, segment, position - segment_start + 1, segment_start, position - 1);
+	jmz_string_array_push(split_formula, segment);
 
 	float sum = molar_mass_value_substitution(split_formula);
 
-	array_string_destroy(split_formula);
+	jmz_string_array_destroy(split_formula);
 
 	return sum;
 }
 
-float molar_mass_value_substitution(array_string *arry) {
+float molar_mass_value_substitution(jmz_String_Array *arry) {
 	int i = 0;
 	float mass_sum = 0;
 
