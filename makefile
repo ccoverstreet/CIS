@@ -4,7 +4,7 @@ CIS: objects objects/main.o objects/molar_mass.o src/JMZ-String/libjmzstring.a s
 objects: 
 	mkdir objects
 
-objects/main.o: src/main.c src/string_array.h
+objects/main.o: src/main.c 
 	gcc -c src/main.c -o objects/main.o
 
 src/JMZ-String/libjmzstring.a: 
