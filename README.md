@@ -2,6 +2,10 @@
 
 The CIS is a terminal-based program that can currently calculate the molar mass of a given chemical formula. 
 
+# IMPORTANT
+
+Migration to Zig in progress to make cross platform support much easier. Building C/C++ programs on Windows tends to be a pain.
+
 ___
 # Installation
 To install CIS, run the following commands:
