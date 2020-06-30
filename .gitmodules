@@ -1,4 +1,0 @@
-[submodule "src/JMZ-String"]
-	path = src/JMZ-String
-	url = https://github.com/ccoverstreet/JMZ-String
-	branch = 0-1-x
