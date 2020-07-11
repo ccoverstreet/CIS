@@ -1,3 +1,6 @@
+# IMPORTANT
+Transition to Zig should wait until the language matures more. Memory handling needs to be fleshed out and compatibility with tools like valgrind is necessary before I start to convert programs fully to Zig. Zig is a very promising language though. Also, I need to make a library/module for handling strings in Zig. No point in rewriting that code.
+
 # Chemical Information System (CIS)
 
 The CIS is a terminal-based program that can currently calculate the molar mass of a given chemical formula. 
