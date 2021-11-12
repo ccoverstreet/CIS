@@ -1,0 +1,3 @@
+6553690 1594426258 754559863 KfRpsktUqfu00_fDml4gOh7XYmEXIQ_W3ZCLQudVYMHY27rQD0J50F2RLLCm-7WB /home/coverstreet/Coding/CIS/objects/main.o
+6553705 1594426259 21228028 Pk4ItEl67ZoiOR3dkt4tJ1TgORxFNf09sgaUOyGwcLkBkyp5kAVeKwaxC6BVHukQ /home/coverstreet/Coding/CIS/objects/molar_mass.o
+6423931 1594427565 760461373 1SJmnnP_AuAQ7pwMVCx53JZ5BXSa2S53tQCatP8pojIucp6ntUiK7LQEP0HmrJ8A /home/coverstreet/Coding/CIS/src/JMZ-String/libjmzstring.a
